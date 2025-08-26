@@ -165,9 +165,9 @@ Example flashcard files are provided in the `examples/` directory:
 ### Project Structure
 
 ```
-flashcard-app/
+CrabLang/
 ├── src/
-│   └── flashcard_app/
+│   └── crablang/
 │       ├── __init__.py
 │       ├── file_parser.py
 │       ├── flashcard_manager.py
