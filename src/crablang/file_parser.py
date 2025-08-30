@@ -76,8 +76,8 @@ class FileParser:
 
         Example:
             >>> parser = FileParser()
-            >>> content = "apple\\tred fruit\\nbanana\\tyellow fruit"
-            >>> flashcards = parser.parse_content(content, delimiter='\\t')
+            >>> content = "apple\tred fruit\nbanana\tyellow fruit"
+            >>> flashcards = parser.parse_content(content, delimiter='\t')
             >>> len(flashcards)
             2
         """
@@ -109,7 +109,7 @@ class FileParser:
                 self.parse_stats["skipped_lines"] += 1
                 continue
             try:
-                if re.match(line, pattern):
+                if re.match(pattern, line):
                     term, definition = self._parse_line(line, delimiter)
                     if term and definition:
                         if term in flashcards:
@@ -121,6 +121,11 @@ class FileParser:
                         self.parse_stats["valid_pairs"] += 1
                     else:
                         self.parse_stats["skipped_lines"] += 1
+                else:
+                    self.parse_stats["errors"] += 1
+                    print(
+                        f"Error parsing line {line_num}: {line} - malformed line."
+                    )
 
             except Exception as e:
                 self.parse_stats["errors"] += 1
