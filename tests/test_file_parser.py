@@ -48,6 +48,16 @@ class TestFileParser:
             and self.parser.parse_stats["skipped_lines"] == 0
         )
 
+    @pytest.mark.parametrize("delimeter", ["\t", ",", ";", "##"])
+    def test_parse_content_with_comments_malformed_lines(self, delimeter):
+        """Test parsing content with comments and empty lines."""
+        content = f"\nmalformed_line# Fruits\napple{delimeter}red fruit\n\n# More fruits\nbanana{delimeter}yellow fruit\nmalformed_line"
+        flashcards = self.parser.parse_content(content, delimeter)
+        assert len(flashcards) == 2
+        assert (
+            self.parser.parse_stats["skipped_lines"] >= 2
+        )  # comments + empty lines
+
     def test_validate_flashcards(self):
         """Test flashcard validation."""
         flashcards = {
