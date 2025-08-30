@@ -1,5 +1,5 @@
 """
-File parsing module for flashcard application.
+File parsing module for crablang application.
 This module handles reading and parsing various flashcard file formats
 with robust error handling and automatic format detection.
 """
